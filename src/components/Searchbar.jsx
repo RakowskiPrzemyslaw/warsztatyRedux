@@ -12,6 +12,12 @@ class Searchbar extends Component {
     this.setState({ text: e.target.value });
   }
 
+  checkIfSend = (e) => {
+    if (e.key === 'Enter') {
+      this.props.getDrinks(this.state.text);
+    }
+  }
+
   render() {
     return (
       <input
@@ -20,6 +26,7 @@ class Searchbar extends Component {
         placeholder="Enter name of ingredient"
         value={this.state.text}
         onChange={this.updateText}
+        onKeyPress={this.checkIfSend}
       />
     );
   }

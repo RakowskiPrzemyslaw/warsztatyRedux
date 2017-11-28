@@ -12,7 +12,10 @@ class DrinksList extends Component {
     return (
       <div style={{ width: '35%', marginTop: 30 }}>
         <ul className="list-group" style={{ width: '100%' }}>
-          {this.props.drinks.map(this.renderDrink)}
+          {this.props.drinks
+            ? this.props.drinks.map(this.renderDrink)
+            : <li className="list-group-item drink-item">No results</li>
+          }
         </ul>
       </div>
     );

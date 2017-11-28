@@ -13,7 +13,11 @@ class App extends Component {
   }
 
   componentWillMount() {
-    axios.get('http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=Vodka')
+    this.getDrinks(this.state.query);
+  }
+
+  getDrinks = (query) => {
+    axios.get(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`)
       .then((data) => {
         const { drinks } = data.data;
         this.setState({ drinks });
@@ -23,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Searchbar />
+        <Searchbar getDrinks={this.getDrinks} />
         <div className="wrapper">
           <DrinkDetails />
           <DrinksList drinks={this.state.drinks} />
