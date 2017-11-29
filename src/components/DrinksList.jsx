@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 
 class DrinksList extends Component {
-  renderDrink(drink, index) {
+  renderDrink = (drink, index) => {
     if (index < 15) {
-      return <li key={index} className="list-group-item drink-item">{drink.strDrink}</li>;
+      return (
+        <li
+          key={index}
+          className="list-group-item drink-item"
+          onClick={() => { this.props.changeCurrentDrinkIndex(index); }}
+        >
+          {drink.strDrink}
+        </li>
+      );
     }
     return null;
   }

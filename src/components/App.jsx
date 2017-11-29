@@ -9,19 +9,38 @@ class App extends Component {
     super(props);
     this.state = {
       drinks: [],
+      currentDrinkIndex: 0,
+      currentDrink: {},
     };
   }
 
   componentWillMount() {
-    this.getDrinks(this.state.query);
+    this.getDrinks('Vodka');
   }
 
   getDrinks = (query) => {
     axios.get(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`)
       .then((data) => {
         const { drinks } = data.data;
-        this.setState({ drinks });
+        this.setState({ drinks, currentDrinkIndex: 0 }, () => {
+          this.getCurrentDrink();
+        });
       });
+  }
+
+  getCurrentDrink = () => {
+    const id = this.state.drinks[this.state.currentDrinkIndex].idDrink;
+    axios.get(`http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+      .then((data) => {
+        const currentDrink = data.data.drinks[0];
+        this.setState({ currentDrink });
+      });
+  }
+
+  changeCurrentDrinkIndex = (currentDrinkIndex) => {
+    this.setState({ currentDrinkIndex }, () => {
+      this.getCurrentDrink();
+    });
   }
 
   render() {
@@ -29,8 +48,11 @@ class App extends Component {
       <div>
         <Searchbar getDrinks={this.getDrinks} />
         <div className="wrapper">
-          <DrinkDetails />
-          <DrinksList drinks={this.state.drinks} />
+          <DrinkDetails drink={this.state.currentDrink} />
+          <DrinksList
+            drinks={this.state.drinks}
+            changeCurrentDrinkIndex={this.changeCurrentDrinkIndex}
+          />
         </div>
       </div>
     );
