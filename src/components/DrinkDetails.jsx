@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 
 
 class DrinkDetails extends Component {
+  renderIngredient = (index) => {
+    const ingredientMeasure = this.props.drink[`strMeasure${index + 1}`];
+    const ingredientName = this.props.drink[`strIngredient${index + 1}`];
+    if (ingredientName) {
+      return <li key={index} className="list-group-item">{`${ingredientMeasure} ${ingredientName}`}</li>;
+    }
+    return null;
+  }
+
   render() {
     const { drink } = this.props;
 
@@ -22,10 +32,7 @@ class DrinkDetails extends Component {
             </div>
           </div>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">1 1/2 oz Tequila</li>
-            <li className="list-group-item">1/2 oz Triple sec</li>
-            <li className="list-group-item">1 os Lime juice</li>
-            <li className="list-group-item">Salt</li>
+            {_.times(15, this.renderIngredient)}
           </ul>
         </div>
       </div>
