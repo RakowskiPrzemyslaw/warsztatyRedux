@@ -9,7 +9,6 @@ class App extends Component {
     super(props);
     this.state = {
       drinks: [],
-      currentDrinkIndex: 0,
       currentDrink: {},
     };
   }
@@ -22,25 +21,18 @@ class App extends Component {
     axios.get(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`)
       .then((data) => {
         const { drinks } = data.data;
-        this.setState({ drinks, currentDrinkIndex: 0 }, () => {
-          this.getCurrentDrink();
+        this.setState({ drinks }, () => {
+          this.getCurrentDrink(drinks[0].idDrink);
         });
       });
   }
 
-  getCurrentDrink = () => {
-    const id = this.state.drinks[this.state.currentDrinkIndex].idDrink;
+  getCurrentDrink = (id) => {
     axios.get(`http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((data) => {
         const currentDrink = data.data.drinks[0];
         this.setState({ currentDrink });
       });
-  }
-
-  changeCurrentDrinkIndex = (currentDrinkIndex) => {
-    this.setState({ currentDrinkIndex }, () => {
-      this.getCurrentDrink();
-    });
   }
 
   render() {
@@ -51,7 +43,7 @@ class App extends Component {
           <DrinkDetails drink={this.state.currentDrink} />
           <DrinksList
             drinks={this.state.drinks}
-            changeCurrentDrinkIndex={this.changeCurrentDrinkIndex}
+            getCurrentDrink={this.getCurrentDrink}
           />
         </div>
       </div>

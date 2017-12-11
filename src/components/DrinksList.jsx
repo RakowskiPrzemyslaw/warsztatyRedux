@@ -7,7 +7,7 @@ class DrinksList extends Component {
         <li
           key={index}
           className="list-group-item drink-item"
-          onClick={() => { this.props.changeCurrentDrinkIndex(index); }}
+          onClick={() => { this.props.getCurrentDrink(drink.idDrink); }}
         >
           {drink.strDrink}
         </li>
