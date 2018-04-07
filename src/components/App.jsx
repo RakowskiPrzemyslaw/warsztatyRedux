@@ -18,8 +18,9 @@ class App extends Component {
   }
 
   getDrinks = (query) => {
-    axios.get(`http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`)
+    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`)
       .then((data) => {
+        console.log(data);
         const { drinks } = data.data;
         this.setState({ drinks }, () => {
           this.getCurrentDrink(drinks[0].idDrink);
@@ -28,7 +29,7 @@ class App extends Component {
   }
 
   getCurrentDrink = (id) => {
-    axios.get(`http://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
+    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((data) => {
         const currentDrink = data.data.drinks[0];
         this.setState({ currentDrink });
