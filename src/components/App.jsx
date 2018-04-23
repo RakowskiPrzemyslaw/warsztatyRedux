@@ -5,12 +5,9 @@ import DrinksList from './DrinksList';
 import DrinkDetails from './DrinkDetails';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      drinks: [],
-      currentDrink: {},
-    };
+  state = {
+    drinks: [],
+    currentDrink: {},
   }
 
   componentWillMount() {
@@ -23,7 +20,9 @@ class App extends Component {
         console.log(data);
         const { drinks } = data.data;
         this.setState({ drinks }, () => {
-          this.getCurrentDrink(drinks[0].idDrink);
+          if (drinks) {
+            this.getCurrentDrink(drinks[0].idDrink);
+          }
         });
       });
   }
