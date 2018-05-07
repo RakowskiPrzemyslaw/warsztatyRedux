@@ -3,5 +3,17 @@
 3. importujemy combineReducers
 4. przykładowy reducer żeby sprawdzić czy nam to będzie działać
 
+5. Łączymy reduxa do naszej aplikacji index.js
+  a) Provider
+  b) createStore
+  c) import reducerów
+
+6. w App js
+  a) import connect
+  b) mapStateToProps
+  c) export connectem
+  d) componentDidMount sprawdzamy czy działa
+
+
 
 

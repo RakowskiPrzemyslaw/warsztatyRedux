@@ -4,6 +4,8 @@ import Searchbar from './Searchbar';
 import DrinksList from './DrinksList';
 import DrinkDetails from './DrinkDetails';
 
+import { connect } from 'react-redux'; //////////
+
 class App extends Component {
   state = {
     drinks: [],
@@ -12,6 +14,10 @@ class App extends Component {
 
   componentWillMount() {
     this.getDrinks('Vodka');
+  }
+
+  componentDidMount(){
+    console.log(this.props.test); /////////////////
   }
 
   getDrinks = (query) => {
@@ -51,4 +57,16 @@ class App extends Component {
   }
 }
 
-export default App;
+
+
+
+function mapStateToProps(state) {
+  return {
+    test: state.test, /////////////////
+  };
+}
+
+
+
+export default connect(mapStateToProps)(App);
+/////////////////////////////////////////////////
