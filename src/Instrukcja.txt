@@ -1,0 +1,7 @@
+1. Instalujemy redux i react-redux
+2. Tworzymy root Reducera
+3. importujemy combineReducers
+4. przykładowy reducer żeby sprawdzić czy nam to będzie działać
+
+
+
