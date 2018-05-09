@@ -1,3 +1,3 @@
 export default function () {
-  return 'Redux nam działą!';
+  return 'Redux nam działa!';
 }

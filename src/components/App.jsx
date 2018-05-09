@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import Searchbar from './Searchbar';
 import DrinksList from './DrinksList';
 import DrinkDetails from './DrinkDetails';
 
-import { connect } from 'react-redux'; //////////
 
 class App extends Component {
   state = {
     drinks: [],
     currentDrink: {},
-  }
+  };
 
   componentWillMount() {
     this.getDrinks('Vodka');
-  }
-
-  componentDidMount(){
-    console.log(this.props.test); /////////////////
   }
 
   getDrinks = (query) => {
@@ -31,7 +27,7 @@ class App extends Component {
           }
         });
       });
-  }
+  };
 
   getCurrentDrink = (id) => {
     axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -39,7 +35,7 @@ class App extends Component {
         const currentDrink = data.data.drinks[0];
         this.setState({ currentDrink });
       });
-  }
+  };
 
   render() {
     return (
@@ -58,15 +54,10 @@ class App extends Component {
 }
 
 
-
-
 function mapStateToProps(state) {
   return {
-    test: state.test, /////////////////
+    test: state.test,
   };
 }
 
-
-
 export default connect(mapStateToProps)(App);
-/////////////////////////////////////////////////
