@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getDrinks } from "../actions";
+
 
 class Searchbar extends Component {
   state = {
@@ -29,4 +32,6 @@ class Searchbar extends Component {
   }
 }
 
-export default Searchbar;
+
+
+export default connect(null, { getDrinks })(Searchbar);

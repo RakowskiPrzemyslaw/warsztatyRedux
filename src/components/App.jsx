@@ -1,72 +1,36 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import Searchbar from './Searchbar';
 import DrinksList from './DrinksList';
 import DrinkDetails from './DrinkDetails';
 
-import { connect } from 'react-redux'; //////////
+import { getDrinks, getCurrentDrink } from '../actions';
+
 
 class App extends Component {
-  state = {
-    drinks: [],
-    currentDrink: {},
-  }
-
-  componentWillMount() {
-    this.getDrinks('Vodka');
-  }
-
-  componentDidMount(){
-    console.log(this.props.test); /////////////////
-  }
-
-  getDrinks = (query) => {
-    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`)
-      .then((data) => {
-        console.log(data);
-        const { drinks } = data.data;
-        this.setState({ drinks }, () => {
-          if (drinks) {
-            this.getCurrentDrink(drinks[0].idDrink);
-          }
-        });
-      });
-  }
-
-  getCurrentDrink = (id) => {
-    axios.get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((data) => {
-        const currentDrink = data.data.drinks[0];
-        this.setState({ currentDrink });
-      });
+  componentWillMount(){
+    this.props.getDrinks('Vodka');
+    this.props.getCurrentDrink(14029);
   }
 
   render() {
     return (
       <div>
-        <Searchbar getDrinks={this.getDrinks} />
+        <Searchbar />
         <div className="wrapper">
-          <DrinkDetails drink={this.state.currentDrink} />
-          <DrinksList
-            drinks={this.state.drinks}
-            getCurrentDrink={this.getCurrentDrink}
-          />
+          <DrinkDetails />
+          <DrinksList />
         </div>
       </div>
     );
   }
 }
 
-
-
-
 function mapStateToProps(state) {
   return {
-    test: state.test, /////////////////
+    test: state.test,
+    currentDrink: state.currentDrink,
   };
 }
 
-
-
-export default connect(mapStateToProps)(App);
-/////////////////////////////////////////////////
+export default connect(mapStateToProps, { getDrinks, getCurrentDrink })(App);

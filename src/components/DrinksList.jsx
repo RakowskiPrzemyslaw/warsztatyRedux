@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import { getCurrentDrink } from "../actions";
+
 
 class DrinksList extends Component {
   renderDrink = (drink, index) => {
@@ -17,17 +21,26 @@ class DrinksList extends Component {
   }
 
   render() {
+    console.log(this.props);
+
     return (
       <div style={{ width: '35%', marginTop: 30 }}>
         <ul className="list-group" style={{ width: '100%' }}>
-          {this.props.drinks
-            ? this.props.drinks.map(this.renderDrink)
-            : <li className="list-group-item drink-item">No results</li>
-          }
-        </ul>
+        {this.props.drinks
+          ? this.props.drinks.map(this.renderDrink)
+          : <li className="list-group-item drink-item">No results</li>
+        }
+      </ul>
       </div>
     );
   }
 }
 
-export default DrinksList;
+function mapStateToProps(state) {
+  return {
+    currentDrink: state.currentDrink,
+    drinks: state.drinks,
+  };
+}
+
+export default connect(mapStateToProps, { getCurrentDrink })(DrinksList);

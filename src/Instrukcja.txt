@@ -14,6 +14,10 @@
   c) export connectem
   d) componentDidMount sprawdzamy czy działa
 
+7. Tworzymy reducera dla listy
+8. przenosimy i przerabiamy actions
+9. instalujemy redux-promise
+10. spinamy wszystko
 
 
 
