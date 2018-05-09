@@ -26,11 +26,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    test: state.test,
-    currentDrink: state.currentDrink,
-  };
-}
 
-export default connect(mapStateToProps, { getDrinks, getCurrentDrink })(App);
+export default connect(null, { getDrinks, getCurrentDrink })(App);
