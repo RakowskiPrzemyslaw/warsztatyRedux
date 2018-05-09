@@ -15,9 +15,12 @@
   d) componentDidMount sprawdzamy czy działa
 
 7. instalujemy redux-promise
-8. przenosimy i przerabiamy actions
-9. Tworzymy reducera dla listy
-10. spinamy wszystko
+    i dodajemy middleware w index.jsx
+8. pokazuje App i co się zmieniło
+9. przenosimy i przerabiamy actions, middleware
+10. Tworzymy reducera dla listy i dla drinka
+11. DrinkList podpinamy 
+11. spinamy wszystko
 
 
 
